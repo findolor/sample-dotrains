@@ -71,8 +71,8 @@ gui:
 ---
 #io-ratio !The io ratio for the limit order.
 #calculate-io
-max-output: max-value(), /* full balance of output vault */
-io: io-ratio /* how many inputs i want for my output = token1 per token2 */;
+max-output: max-value(),
+io: io-ratio;
 #handle-io
 :;
 #handle-add-order
