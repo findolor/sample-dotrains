@@ -62,10 +62,9 @@ gui:
             - 1000
             - 10000
       fields:
-        - binding: fixed-io
+        - binding: io-ratio
           name: token1 to token2 ratio
           description: How many inputs do you want to have per one output?
-          presets:
       select-tokens:
         - token1
         - token2
