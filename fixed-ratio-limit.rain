@@ -23,12 +23,14 @@ orderbooks:
     subgraph: base
   polygon:
     address: 0x7D2f700b1f6FD75734824EA4578960747bdF269A
+    network: polygon
 deployers:
   base:
     address: 0xC1A14cE2fd58A3A2f99deCb8eDd866204eE07f8D
     network: base
   polygon:
     address: 0xE7116BC05C8afe25e5B54b813A74F916B5D42aB1
+    network: polygon
 orders:
   base-token1-token2:
     orderbook: base
