@@ -37,7 +37,7 @@ orders:
       - token: token1
     outputs:
       - token: token2
-  polygon-input-output
+  polygon-input-output:
     orderbook: polygon
     network: polygon
     inputs:
@@ -69,7 +69,7 @@ gui:
   deployments:
     - deployment: base-token1-token2
       name: Buy token1 with token2 on Base.
-      description:
+      description: >
         Buy token1 with token2 with a fixed ratio on Base network.
       deposits:
         - token: token2
@@ -88,8 +88,8 @@ gui:
         - token1
         - token2
     - deployment: polygon-input-output
-      name: Buy ${order.inputs.0.label} with ${order.outputs.0.label} on Base.
-      description:
+      name: Buy ${order.inputs.0.label} with ${order.outputs.0.label} on Polygon.
+      description: >
         Buy ${order.inputs.0.symbol} with ${order.outputs.0.symbol} with a fixed ratio on Polygon network.
       deposits:
         - token: output
