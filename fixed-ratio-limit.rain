@@ -5,26 +5,30 @@ networks:
     chain-id: 8453
     network-id: 8453
     currency: ETH
+  polygon:
+    rpc: https://rpc.ankr.com/polygon
+    chain-id: 137
+    network-id: 137
+    currency: POL
 metaboards:
   base: https://api.goldsky.com/api/public/project_clv14x04y9kzi01saerx7bxpg/subgraphs/mb-base-0x59401C93/0.1/gn
+  polygon: https://api.goldsky.com/api/public/project_clv14x04y9kzi01saerx7bxpg/subgraphs/mb-polygon/0.1/gn
 subgraphs:
   base: https://api.goldsky.com/api/public/project_clv14x04y9kzi01saerx7bxpg/subgraphs/ob4-base/0.7/gn
+  polygon: https://example.com/subgraph
 orderbooks:
   base:
     address: 0xd2938e7c9fe3597f78832ce780feb61945c377d7
     network: base
     subgraph: base
+  polygon:
+    address: 0x7D2f700b1f6FD75734824EA4578960747bdF269A
 deployers:
   base:
     address: 0xC1A14cE2fd58A3A2f99deCb8eDd866204eE07f8D
     network: base
-tokens:
-  token1:
-    network: base
-    address: "0x1234567890abcdef1234567890abcdef12345678"
-  token2:
-    network: base
-    address: "0x1234567890abcdef1234567890abcdef12345678"
+  polygon:
+    address: 0xE7116BC05C8afe25e5B54b813A74F916B5D42aB1
 orders:
   base-token1-token2:
     orderbook: base
@@ -33,9 +37,21 @@ orders:
       - token: token1
     outputs:
       - token: token2
+  polygon-input-output
+    orderbook: polygon
+    network: polygon
+    inputs:
+      - token: input
+    outputs:
+      - token: output
 scenarios:
   base:
     orderbook: base
+    runs: 1
+    bindings:
+      io-ratio: 10
+  polygon:
+    orderbook: polygon
     runs: 1
     bindings:
       io-ratio: 10
@@ -43,6 +59,9 @@ deployments:
   base-token1-token2:
     order: base-token1-token2
     scenario: base
+  polygon-input-output:
+    order: polygon-input-output
+    scenario: polygon
 gui:
   name: Fixed limit
   description: >
@@ -68,6 +87,26 @@ gui:
       select-tokens:
         - token1
         - token2
+    - deployment: polygon-input-output
+      name: Buy ${order.inputs.0.label} with ${order.outputs.0.label} on Base.
+      description:
+        Buy ${order.inputs.0.symbol} with ${order.outputs.0.symbol} with a fixed ratio on Polygon network.
+      deposits:
+        - token: output
+          min: 0
+          presets:
+            - 0
+            - 10
+            - 100
+            - 1000
+            - 10000
+      fields:
+        - binding: io-ratio
+          name: token1 to token2 ratio
+          description: How many inputs do you want to have per one output?
+      select-tokens:
+        - input
+        - output
 ---
 #io-ratio !The io ratio for the limit order.
 #calculate-io
