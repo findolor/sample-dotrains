@@ -27,6 +27,7 @@ orders:
       - token: output
 scenarios:
   polygon:
+    deployer: polygon
     orderbook: polygon
     runs: 1
     bindings:
