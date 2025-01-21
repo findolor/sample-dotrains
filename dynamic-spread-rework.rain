@@ -8,9 +8,9 @@ scenarios:
       raindex-subparser: 0xb06202aA3Fe7d85171fB7aA5f17011d17E63f382
       history-cap: '1e50'
       shy-epoch: 0.05
-      amount-token: ${order.inputs.0.address}
-      initial-output-token: ${order.outputs.1.address}
-      initial-input-token: ${order.inputs.0.address}
+      amount-token: ${order.inputs.0.token.address}
+      initial-output-token: ${order.outputs.1.token.address}
+      initial-input-token: ${order.inputs.0.token.address}
   base:
     orderbook: base
     runs: 1
@@ -18,9 +18,9 @@ scenarios:
       raindex-subparser: 0x662dFd6d5B6DF94E07A60954901D3001c24F856a
       history-cap: '1e50'
       shy-epoch: 0.05
-      amount-token: ${order.inputs.0.address}
-      initial-output-token: ${order.outputs.1.address}
-      initial-input-token: ${order.inputs.0.address}
+      amount-token: ${order.inputs.0.token.address}
+      initial-output-token: ${order.outputs.1.token.address}
+      initial-input-token: ${order.inputs.0.token.address}
   flare:
     orderbook: flare
     runs: 1
@@ -28,9 +28,9 @@ scenarios:
       raindex-subparser: 0xFe2411CDa193D9E4e83A5c234C7Fd320101883aC
       history-cap: '1e50'
       shy-epoch: 0.05
-      amount-token: ${order.inputs.0.address}
-      initial-output-token: ${order.outputs.1.address}
-      initial-input-token: ${order.inputs.0.address}
+      amount-token: ${order.inputs.0.token.address}
+      initial-output-token: ${order.outputs.1.token.address}
+      initial-input-token: ${order.inputs.0.token.address}
   polygon:
     orderbook: polygon
     runs: 1
@@ -38,9 +38,9 @@ scenarios:
       raindex-subparser: 0xF9323B7d23c655122Fb0272D989b83E105cBcf9d
       history-cap: '1e50'
       shy-epoch: 0.05
-      amount-token: ${order.inputs.0.address}
-      initial-output-token: ${order.outputs.1.address}
-      initial-input-token: ${order.inputs.0.address}
+      amount-token: ${order.inputs.0.token.address}
+      initial-output-token: ${order.outputs.1.token.address}
+      initial-input-token: ${order.inputs.0.token.address}
   bsc:
     orderbook: bsc
     runs: 1
@@ -48,9 +48,9 @@ scenarios:
       raindex-subparser: 0x662dFd6d5B6DF94E07A60954901D3001c24F856a
       history-cap: '1e50'
       shy-epoch: 0.05
-      amount-token: ${order.inputs.0.address}
-      initial-output-token: ${order.outputs.1.address}
-      initial-input-token: ${order.inputs.0.address}
+      amount-token: ${order.inputs.0.token.address}
+      initial-output-token: ${order.outputs.1.token.address}
+      initial-input-token: ${order.inputs.0.token.address}
   ethereum:
     orderbook: ethereum
     runs: 1
@@ -58,9 +58,9 @@ scenarios:
       raindex-subparser: 0x22410e2a46261a1B1e3899a072f303022801C764
       history-cap: '1e50'
       shy-epoch: 0.05
-      amount-token: ${order.inputs.0.address}
-      initial-output-token: ${order.outputs.1.address}
-      initial-input-token: ${order.inputs.0.address}
+      amount-token: ${order.inputs.0.token.address}
+      initial-output-token: ${order.outputs.1.token.address}
+      initial-input-token: ${order.inputs.0.token.address}
   linea:
     orderbook: linea
     runs: 1
@@ -68,9 +68,9 @@ scenarios:
       raindex-subparser: 0xF77b3c3f61af5a3cE7f7CE3cfFc117491104432E
       history-cap: '1e50'
       shy-epoch: 0.05
-      amount-token: ${order.inputs.0.address}
-      initial-output-token: ${order.outputs.1.address}
-      initial-input-token: ${order.inputs.0.address}
+      amount-token: ${order.inputs.0.token.address}
+      initial-output-token: ${order.outputs.1.token.address}
+      initial-input-token: ${order.inputs.0.token.address}
 
 networks:
   flare:
@@ -161,7 +161,6 @@ deployers:
 
 orders:
   arbitrum:
-    network: arbitrum
     orderbook: arbitrum
     inputs:
       - token: token1
@@ -170,7 +169,6 @@ orders:
       - token: token1
       - token: token2
   base:
-    network: base
     orderbook: base
     inputs:
       - token: token1
@@ -179,7 +177,6 @@ orders:
       - token: token1
       - token: token2
   flare:
-    network: flare
     orderbook: flare
     inputs:
       - token: token1
@@ -188,7 +185,6 @@ orders:
       - token: token1
       - token: token2
   polygon:
-    network: polygon
     orderbook: polygon
     inputs:
       - token: token1
@@ -197,7 +193,6 @@ orders:
       - token: token1
       - token: token2
   bsc:
-    network: bsc
     orderbook: bsc
     inputs:
       - token: token1
@@ -206,7 +201,6 @@ orders:
       - token: token1
       - token: token2
   ethereum:
-    network: ethereum
     orderbook: ethereum
     inputs:
       - token: token1
@@ -215,7 +209,6 @@ orders:
       - token: token1
       - token: token2
   linea:
-    network: linea
     orderbook: linea
     inputs:
       - token: token1
@@ -264,8 +257,8 @@ gui:
             - name: No
               value: 0
         - binding: initial-io
-          name: Initial price (${order.inputs.0.symbol} per ${order.inputs.1.symbol})
-          description: This should be the ${order.inputs.1.symbol} price you see for ${order.inputs.0.symbol} on Dextools (e.g. 0.038).
+          name: Initial price (${order.inputs.0.token.symbol} per ${order.inputs.1.token.symbol})
+          description: This should be the ${order.inputs.1.token.symbol} price you see for ${order.inputs.0.token.symbol} on Dextools (e.g. 0.038).
           min: 0
         - binding: next-trade-multiplier
           name: Next trade multiplier
@@ -308,7 +301,7 @@ gui:
               value: 28800
         - binding: max-amount
           name: Max amount
-          description: The maximum amount of ${order.inputs.0.symbol} that will be offered in a single auction.
+          description: The maximum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
           min: 0.00005
           presets:
             - name: 0.001
@@ -321,7 +314,7 @@ gui:
               value: 0.1
         - binding: min-amount
           name: Minimum amount
-          description: The minimum amount of ${order.inputs.0.symbol} that will be offered in a single auction.
+          description: The minimum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
           min: 0.00005
           presets:
             - name: 0.0001
@@ -361,8 +354,8 @@ gui:
             - name: No
               value: 0
         - binding: initial-io
-          name: Initial price (${order.inputs.0.symbol} per ${order.inputs.1.symbol})
-          description: This should be the ${order.inputs.1.symbol} price you see for ${order.inputs.0.symbol} on Dextools (e.g. 0.038).
+          name: Initial price (${order.inputs.0.token.symbol} per ${order.inputs.1.token.symbol})
+          description: This should be the ${order.inputs.1.token.symbol} price you see for ${order.inputs.0.token.symbol} on Dextools (e.g. 0.038).
           min: 0
         - binding: next-trade-multiplier
           name: Next trade multiplier
@@ -405,7 +398,7 @@ gui:
               value: 28800
         - binding: max-amount
           name: Max amount
-          description: The maximum amount of ${order.inputs.0.symbol} that will be offered in a single auction.
+          description: The maximum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
           min: 0.00005
           presets:
             - name: 0.001
@@ -418,7 +411,7 @@ gui:
               value: 0.1
         - binding: min-amount
           name: Minimum amount
-          description: The minimum amount of ${order.inputs.0.symbol} that will be offered in a single auction.
+          description: The minimum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
           min: 0.00005
           presets:
             - name: 0.0001
