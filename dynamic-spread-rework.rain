@@ -341,9 +341,494 @@ gui:
       select-tokens:
         - token1
         - token2
+    base:
+      name: token1<>token2 on Base.
+      description: Rotate token1 and token2 on Base.
+      fields:
+        - binding: is-fast-exit
+          name: Fast exit?
+          description: If enabled, the strategy will attempt to exit any position it builds up in a single trade, as soon as it can do so profitably.
+          presets:
+            - name: Yes
+              value: 1
+            - name: No
+              value: 0
+        - binding: initial-io
+          name: Initial price (${order.inputs.0.token.symbol} per ${order.inputs.1.token.symbol})
+          description: This should be the ${order.inputs.1.token.symbol} price you see for ${order.inputs.0.token.symbol} on Dextools (e.g. 0.038).
+          min: 0
+        - binding: next-trade-multiplier
+          name: Next trade multiplier
+          description: This is the most the strategy will move the price in a single trade. Larger numbers will capture larger price jumps but trade less often, smaller numbers will trade more often but be less defensive against large price jumps in the market.
+          min: 0
+          presets:
+            - name: 1.01x
+              value: 1.01
+            - name: 1.02x
+              value: 1.02
+            - name: 1.05x
+              value: 1.05
+        - binding: cost-basis-multiplier
+          name: Cost basis multiplier
+          description: The minimum spread applied to the breakeven in addition to the auction. This is applied in both directions so 1.01x would be a 2% total spread.
+          min: 1
+          presets:
+            - name: 1 (auction spread only)
+              value: 1
+            - name: 1.0005x (0.1% total)
+              value: 1.0005
+            - name: 1.001x (0.2% total)
+              value: 1.001
+            - name: 1.0025x (0.5% total)
+              value: 1.0025
+            - name: 1.005x (1% total)
+              value: 1.005
+        - binding: time-per-epoch
+          name: Time per price halving (seconds)
+          description: The amount of time (in seconds) between halvings of the price and the amount offered during each auction, relative to their baselines.
+          min: 600
+          presets:
+            - name: 1 hour (3600)
+              value: 3600
+            - name: 2 hours (7200)
+              value: 7200
+            - name: 4 hours (14400)
+              value: 14400
+            - name: 8 hours (28800)
+              value: 28800
+        - binding: max-amount
+          name: Max amount
+          description: The maximum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
+          min: 0.00005
+          presets:
+            - name: 0.001
+              value: 0.001
+            - name: 0.002
+              value: 0.002
+            - name: 0.01
+              value: 0.01
+            - name: 0.1
+              value: 0.1
+        - binding: min-amount
+          name: Minimum amount
+          description: The minimum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
+          min: 0.00005
+          presets:
+            - name: 0.0001
+              value: 0.0001
+            - name: 0.0002
+              value: 0.0002
+            - name: 0.001
+              value: 0.001
+            - name: 0.01
+              value: 0.01
+      deposits:
+        - token: token1
+          min: 0
+          presets:
+            - 0
+            - 0.01
+            - 0.1
+        - token: token2
+          min: 0
+          presets:
+            - 0
+            - 0.01
+            - 0.1
+      select-tokens:
+        - token1
+        - token2
     flare:
       name: token1<>token2 on Flare.
       description: Rotate token1 and token2 on Flare.
+      fields:
+        - binding: is-fast-exit
+          name: Fast exit?
+          description: If enabled, the strategy will attempt to exit any position it builds up in a single trade, as soon as it can do so profitably.
+          presets:
+            - name: Yes
+              value: 1
+            - name: No
+              value: 0
+        - binding: initial-io
+          name: Initial price (${order.inputs.0.token.symbol} per ${order.inputs.1.token.symbol})
+          description: This should be the ${order.inputs.1.token.symbol} price you see for ${order.inputs.0.token.symbol} on Dextools (e.g. 0.038).
+          min: 0
+        - binding: next-trade-multiplier
+          name: Next trade multiplier
+          description: This is the most the strategy will move the price in a single trade. Larger numbers will capture larger price jumps but trade less often, smaller numbers will trade more often but be less defensive against large price jumps in the market.
+          min: 0
+          presets:
+            - name: 1.01x
+              value: 1.01
+            - name: 1.02x
+              value: 1.02
+            - name: 1.05x
+              value: 1.05
+        - binding: cost-basis-multiplier
+          name: Cost basis multiplier
+          description: The minimum spread applied to the breakeven in addition to the auction. This is applied in both directions so 1.01x would be a 2% total spread.
+          min: 1
+          presets:
+            - name: 1 (auction spread only)
+              value: 1
+            - name: 1.0005x (0.1% total)
+              value: 1.0005
+            - name: 1.001x (0.2% total)
+              value: 1.001
+            - name: 1.0025x (0.5% total)
+              value: 1.0025
+            - name: 1.005x (1% total)
+              value: 1.005
+        - binding: time-per-epoch
+          name: Time per price halving (seconds)
+          description: The amount of time (in seconds) between halvings of the price and the amount offered during each auction, relative to their baselines.
+          min: 600
+          presets:
+            - name: 1 hour (3600)
+              value: 3600
+            - name: 2 hours (7200)
+              value: 7200
+            - name: 4 hours (14400)
+              value: 14400
+            - name: 8 hours (28800)
+              value: 28800
+        - binding: max-amount
+          name: Max amount
+          description: The maximum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
+          min: 0.00005
+          presets:
+            - name: 0.001
+              value: 0.001
+            - name: 0.002
+              value: 0.002
+            - name: 0.01
+              value: 0.01
+            - name: 0.1
+              value: 0.1
+        - binding: min-amount
+          name: Minimum amount
+          description: The minimum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
+          min: 0.00005
+          presets:
+            - name: 0.0001
+              value: 0.0001
+            - name: 0.0002
+              value: 0.0002
+            - name: 0.001
+              value: 0.001
+            - name: 0.01
+              value: 0.01
+      deposits:
+        - token: token1
+          min: 0
+          presets:
+            - 0
+            - 0.01
+            - 0.1
+        - token: token2
+          min: 0
+          presets:
+            - 0
+            - 0.01
+            - 0.1
+      select-tokens:
+        - token1
+        - token2
+    polygon:
+      name: token1<>token2 on Polygon.
+      description: Rotate token1 and token2 on Polygon.
+      fields:
+        - binding: is-fast-exit
+          name: Fast exit?
+          description: If enabled, the strategy will attempt to exit any position it builds up in a single trade, as soon as it can do so profitably.
+          presets:
+            - name: Yes
+              value: 1
+            - name: No
+              value: 0
+        - binding: initial-io
+          name: Initial price (${order.inputs.0.token.symbol} per ${order.inputs.1.token.symbol})
+          description: This should be the ${order.inputs.1.token.symbol} price you see for ${order.inputs.0.token.symbol} on Dextools (e.g. 0.038).
+          min: 0
+        - binding: next-trade-multiplier
+          name: Next trade multiplier
+          description: This is the most the strategy will move the price in a single trade. Larger numbers will capture larger price jumps but trade less often, smaller numbers will trade more often but be less defensive against large price jumps in the market.
+          min: 0
+          presets:
+            - name: 1.01x
+              value: 1.01
+            - name: 1.02x
+              value: 1.02
+            - name: 1.05x
+              value: 1.05
+        - binding: cost-basis-multiplier
+          name: Cost basis multiplier
+          description: The minimum spread applied to the breakeven in addition to the auction. This is applied in both directions so 1.01x would be a 2% total spread.
+          min: 1
+          presets:
+            - name: 1 (auction spread only)
+              value: 1
+            - name: 1.0005x (0.1% total)
+              value: 1.0005
+            - name: 1.001x (0.2% total)
+              value: 1.001
+            - name: 1.0025x (0.5% total)
+              value: 1.0025
+            - name: 1.005x (1% total)
+              value: 1.005
+        - binding: time-per-epoch
+          name: Time per price halving (seconds)
+          description: The amount of time (in seconds) between halvings of the price and the amount offered during each auction, relative to their baselines.
+          min: 600
+          presets:
+            - name: 1 hour (3600)
+              value: 3600
+            - name: 2 hours (7200)
+              value: 7200
+            - name: 4 hours (14400)
+              value: 14400
+            - name: 8 hours (28800)
+              value: 28800
+        - binding: max-amount
+          name: Max amount
+          description: The maximum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
+          min: 0.00005
+          presets:
+            - name: 0.001
+              value: 0.001
+            - name: 0.002
+              value: 0.002
+            - name: 0.01
+              value: 0.01
+            - name: 0.1
+              value: 0.1
+        - binding: min-amount
+          name: Minimum amount
+          description: The minimum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
+          min: 0.00005
+          presets:
+            - name: 0.0001
+              value: 0.0001
+            - name: 0.0002
+              value: 0.0002
+            - name: 0.001
+              value: 0.001
+            - name: 0.01
+              value: 0.01
+      deposits:
+        - token: token1
+          min: 0
+          presets:
+            - 0
+            - 0.01
+            - 0.1
+        - token: token2
+          min: 0
+          presets:
+            - 0
+            - 0.01
+            - 0.1
+      select-tokens:
+        - token1
+        - token2
+    bsc:
+      name: token1<>token2 on BSC.
+      description: Rotate token1 and token2 on BSC.
+      fields:
+        - binding: is-fast-exit
+          name: Fast exit?
+          description: If enabled, the strategy will attempt to exit any position it builds up in a single trade, as soon as it can do so profitably.
+          presets:
+            - name: Yes
+              value: 1
+            - name: No
+              value: 0
+        - binding: initial-io
+          name: Initial price (${order.inputs.0.token.symbol} per ${order.inputs.1.token.symbol})
+          description: This should be the ${order.inputs.1.token.symbol} price you see for ${order.inputs.0.token.symbol} on Dextools (e.g. 0.038).
+          min: 0
+        - binding: next-trade-multiplier
+          name: Next trade multiplier
+          description: This is the most the strategy will move the price in a single trade. Larger numbers will capture larger price jumps but trade less often, smaller numbers will trade more often but be less defensive against large price jumps in the market.
+          min: 0
+          presets:
+            - name: 1.01x
+              value: 1.01
+            - name: 1.02x
+              value: 1.02
+            - name: 1.05x
+              value: 1.05
+        - binding: cost-basis-multiplier
+          name: Cost basis multiplier
+          description: The minimum spread applied to the breakeven in addition to the auction. This is applied in both directions so 1.01x would be a 2% total spread.
+          min: 1
+          presets:
+            - name: 1 (auction spread only)
+              value: 1
+            - name: 1.0005x (0.1% total)
+              value: 1.0005
+            - name: 1.001x (0.2% total)
+              value: 1.001
+            - name: 1.0025x (0.5% total)
+              value: 1.0025
+            - name: 1.005x (1% total)
+              value: 1.005
+        - binding: time-per-epoch
+          name: Time per price halving (seconds)
+          description: The amount of time (in seconds) between halvings of the price and the amount offered during each auction, relative to their baselines.
+          min: 600
+          presets:
+            - name: 1 hour (3600)
+              value: 3600
+            - name: 2 hours (7200)
+              value: 7200
+            - name: 4 hours (14400)
+              value: 14400
+            - name: 8 hours (28800)
+              value: 28800
+        - binding: max-amount
+          name: Max amount
+          description: The maximum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
+          min: 0.00005
+          presets:
+            - name: 0.001
+              value: 0.001
+            - name: 0.002
+              value: 0.002
+            - name: 0.01
+              value: 0.01
+            - name: 0.1
+              value: 0.1
+        - binding: min-amount
+          name: Minimum amount
+          description: The minimum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
+          min: 0.00005
+          presets:
+            - name: 0.0001
+              value: 0.0001
+            - name: 0.0002
+              value: 0.0002
+            - name: 0.001
+              value: 0.001
+            - name: 0.01
+              value: 0.01
+      deposits:
+        - token: token1
+          min: 0
+          presets:
+            - 0
+            - 0.01
+            - 0.1
+        - token: token2
+          min: 0
+          presets:
+            - 0
+            - 0.01
+            - 0.1
+      select-tokens:
+        - token1
+        - token2
+    ethereum:
+      name: token1<>token2 on Ethereum.
+      description: Rotate token1 and token2 on Ethereum.
+      fields:
+        - binding: is-fast-exit
+          name: Fast exit?
+          description: If enabled, the strategy will attempt to exit any position it builds up in a single trade, as soon as it can do so profitably.
+          presets:
+            - name: Yes
+              value: 1
+            - name: No
+              value: 0
+        - binding: initial-io
+          name: Initial price (${order.inputs.0.token.symbol} per ${order.inputs.1.token.symbol})
+          description: This should be the ${order.inputs.1.token.symbol} price you see for ${order.inputs.0.token.symbol} on Dextools (e.g. 0.038).
+          min: 0
+        - binding: next-trade-multiplier
+          name: Next trade multiplier
+          description: This is the most the strategy will move the price in a single trade. Larger numbers will capture larger price jumps but trade less often, smaller numbers will trade more often but be less defensive against large price jumps in the market.
+          min: 0
+          presets:
+            - name: 1.01x
+              value: 1.01
+            - name: 1.02x
+              value: 1.02
+            - name: 1.05x
+              value: 1.05
+        - binding: cost-basis-multiplier
+          name: Cost basis multiplier
+          description: The minimum spread applied to the breakeven in addition to the auction. This is applied in both directions so 1.01x would be a 2% total spread.
+          min: 1
+          presets:
+            - name: 1 (auction spread only)
+              value: 1
+            - name: 1.0005x (0.1% total)
+              value: 1.0005
+            - name: 1.001x (0.2% total)
+              value: 1.001
+            - name: 1.0025x (0.5% total)
+              value: 1.0025
+            - name: 1.005x (1% total)
+              value: 1.005
+        - binding: time-per-epoch
+          name: Time per price halving (seconds)
+          description: The amount of time (in seconds) between halvings of the price and the amount offered during each auction, relative to their baselines.
+          min: 600
+          presets:
+            - name: 1 hour (3600)
+              value: 3600
+            - name: 2 hours (7200)
+              value: 7200
+            - name: 4 hours (14400)
+              value: 14400
+            - name: 8 hours (28800)
+              value: 28800
+        - binding: max-amount
+          name: Max amount
+          description: The maximum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
+          min: 0.00005
+          presets:
+            - name: 0.001
+              value: 0.001
+            - name: 0.002
+              value: 0.002
+            - name: 0.01
+              value: 0.01
+            - name: 0.1
+              value: 0.1
+        - binding: min-amount
+          name: Minimum amount
+          description: The minimum amount of ${order.inputs.0.token.symbol} that will be offered in a single auction.
+          min: 0.00005
+          presets:
+            - name: 0.0001
+              value: 0.0001
+            - name: 0.0002
+              value: 0.0002
+            - name: 0.001
+              value: 0.001
+            - name: 0.01
+              value: 0.01
+      deposits:
+        - token: token1
+          min: 0
+          presets:
+            - 0
+            - 0.01
+            - 0.1
+        - token: token2
+          min: 0
+          presets:
+            - 0
+            - 0.01
+            - 0.1
+      select-tokens:
+        - token1
+        - token2
+    line:
+      name: token1<>token2 on Linea.
+      description: Rotate token1 and token2 on Linea.
       fields:
         - binding: is-fast-exit
           name: Fast exit?
