@@ -1,0 +1,83 @@
+raindex-version: 8898591f3bcaa21dc91dc3b8584330fc405eadfa
+networks:
+  polygon:
+    rpc: https://rpc.ankr.com/polygon
+    chain-id: 137
+    network-id: 137
+    currency: POL
+metaboards:
+  polygon: https://api.goldsky.com/api/public/project_clv14x04y9kzi01saerx7bxpg/subgraphs/mb-polygon/0.1/gn
+subgraphs:
+  polygon: https://example.com/subgraph
+orderbooks:
+  polygon:
+    address: 0x7D2f700b1f6FD75734824EA4578960747bdF269A
+    network: polygon
+deployers:
+  polygon:
+    address: 0xE7116BC05C8afe25e5B54b813A74F916B5D42aB1
+    network: polygon
+orders:
+  polygon-input-output:
+    orderbook: polygon
+    network: polygon
+    inputs:
+      - token: input
+    outputs:
+      - token: output
+scenarios:
+  polygon:
+    deployer: polygon
+    orderbook: polygon
+    runs: 1
+    bindings:
+      io-ratio: 10
+deployments:
+  polygon-input-output:
+    order: polygon-input-output
+    scenario: polygon
+gui:
+  name: Fixed limit
+  description: >
+    Fixed limit order strategy
+  deployments:
+    polygon-input-output:
+      name: Buy ${order.inputs.0.label} with ${order.outputs.0.label} on Polygon.
+      description: >
+        Buy ${order.inputs.0.symbol} with ${order.outputs.0.symbol} with a fixed ratio on Polygon network.
+      deposits:
+        - token: output
+          min: 0
+          presets:
+            - 0
+            - 10
+            - 100
+            - 1000
+            - 10000
+      fields:
+        - binding: io-ratio
+          name: token1 to token2 ratio
+          description: How many inputs do you want to have per one output?
+        - binding: binding2
+          name: Test binding 2
+          description: This is a test binding 2
+          default: 100
+        - binding: binding3
+          name: Test binding 3
+          description: This is a test binding 3
+        - binding: binding4
+          name: Test binding 4
+          description: This is a test binding 4
+          default: 150
+      select-tokens:
+        - input
+        - output
+---
+#io-ratio !The io ratio for the limit order.
+#calculate-io
+max-output: max-value(),
+io: io-ratio;
+#handle-io
+:;
+#handle-add-order
+:;
