@@ -803,20 +803,15 @@ gui:
               value: 31536000
         - binding: amount-per-epoch
           name: Budget (${order.outputs.0.token.symbol} per period)
-          description: >
-            The amount of ${order.outputs.0.token.symbol} to spend each budget period.
-
-            For example, if the budget is daily and this is 10 then 10 ${order.outputs.0.token.symbol} will be sold for ${order.inputs.0.token.symbol} each day.
+          description: The amount of ${order.outputs.0.token.symbol} to spend each budget period. For example, if the budget is daily and this is 10 then 10 ${order.outputs.0.token.symbol} will be sold for ${order.inputs.0.token.symbol} each day.
           show-custom-field: true
         - binding: max-trade-amount
           name: Maximum trade size (${order.outputs.0.token.symbol})
-          description: >
-            The maximum amount of ${order.outputs.0.token.symbol} to sell in a single auction.
+          description: The maximum amount of ${order.outputs.0.token.symbol} to sell in a single auction.
           show-custom-field: true
         - binding: min-trade-amount
           name: Minimum trade size (${order.outputs.0.token.symbol})
-          description: >
-            The minimum amount of ${order.outputs.0.token.symbol} to sell in a single auction.
+          description: The minimum amount of ${order.outputs.0.token.symbol} to sell in a single auction.
           show-custom-field: true
         - binding: time-per-trade-epoch
           name: Auction period (in seconds)
@@ -841,13 +836,11 @@ gui:
               value: 86400
         - binding: baseline
           name: Baseline ${order.inputs.0.token.symbol} per ${order.outputs.0.token.symbol}
-          description: >
-            The absolute minimum amount of ${order.inputs.0.token.symbol} per ${order.outputs.0.token.symbol} that the auction will trade at.
+          description: The absolute minimum amount of ${order.inputs.0.token.symbol} per ${order.outputs.0.token.symbol} that the auction will trade at.
           show-custom-field: true
         - binding: initial-io
           name: Kickoff ${order.inputs.0.token.symbol} per ${order.outputs.0.token.symbol}
-          description: >
-            The initial ${order.inputs.0.token.symbol} per ${order.outputs.0.token.symbol} to kickoff the first auction.
+          description: The initial ${order.inputs.0.token.symbol} per ${order.outputs.0.token.symbol} to kickoff the first auction.
           show-custom-field: true
         - binding: next-trade-multiplier
           name: Auction start multiplier
