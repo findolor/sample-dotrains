@@ -40,6 +40,7 @@ gui:
   name: Fixed limit
   description: >
     Fixed limit order strategy
+  short-description: Short desc
   deployments:
     polygon-input-output:
       name: Buy ${order.inputs.0.label} with ${order.outputs.0.label} on Polygon.
